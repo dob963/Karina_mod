@@ -13,8 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Build firmware variants
-        run: python3 tools/build_karina.py
+        run: |
+          python3 tools/build_karina.py
+          git fetch origin karina-plus:refs/remotes/origin/karina-plus
+          git show origin/karina-plus:11.08fw_3_KARINA_PLUS.bin > dist/11.08fw_3_KARINA_PLUS_FLASHED.bin
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
