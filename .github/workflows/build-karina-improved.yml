@@ -1,0 +1,23 @@
+name: Build Karina Improved
+
+on:
+  push:
+    branches: [karina-improved]
+    paths:
+      - '11.08fw_3.bin'
+      - 'tools/build_karina_improved.py'
+      - '.github/workflows/build-karina-improved.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: python3 tools/build_karina_improved.py
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: karina-11.08-improved
+          path: dist/*.bin
