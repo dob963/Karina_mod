@@ -1,4 +1,4 @@
-name: Build Karina V3 Improved
+name: F4HWN V3 Spectrum Improved
 
 on:
   push:
@@ -31,11 +31,11 @@ jobs:
       - name: Copy final BIN
         run: |
           mkdir -p dist
-          cp upstream/build/Fusion/f4hwn.fusion.bin dist/KARINA_V3_IMPROVED_FUSION.bin
-          ls -lh dist/KARINA_V3_IMPROVED_FUSION.bin
+          cp upstream/build/Fusion/f4hwn.fusion.bin dist/F4HWN_V3_SPECTRUM_IMPROVED.bin
+          ls -lh dist/F4HWN_V3_SPECTRUM_IMPROVED.bin
 
       - name: Upload BIN
         uses: actions/upload-artifact@v4
         with:
-          name: KARINA-V3-IMPROVED
-          path: dist/KARINA_V3_IMPROVED_FUSION.bin
+          name: F4HWN-V3-SPECTRUM-IMPROVED
+          path: dist/F4HWN_V3_SPECTRUM_IMPROVED.bin
