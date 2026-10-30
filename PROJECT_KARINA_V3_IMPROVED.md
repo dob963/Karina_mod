@@ -16,3 +16,6 @@ La modifica visuale è isolata in App/app/spectrum.c:
 3. nessuna modifica alla scansione tasti, bootloader, radio state machine o gestione EEPROM.
 
 Il progetto contiene anche una GitHub Action che clona il sorgente V3 reale, applica la modifica e produce il BIN Fusion come artifact.
+
+
+Build target: F4HWN V3 Spectrum Improved (not Karina binary fusion).
