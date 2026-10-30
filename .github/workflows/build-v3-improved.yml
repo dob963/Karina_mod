@@ -1,0 +1,41 @@
+name: Build Karina V3 Improved
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Get real V3 source
+        run: |
+          git clone --depth 1 https://github.com/armel/uv-k1-k5v3-firmware-custom.git upstream
+
+      - name: Apply Spectrum improvement
+        run: |
+          cp tools/apply_spectrum_improved.py upstream/tools/apply_spectrum_improved.py
+          cd upstream
+          python3 tools/apply_spectrum_improved.py
+
+      - name: Build real V3 firmware
+        run: |
+          cd upstream
+          chmod +x compile-firmware.sh
+          ./compile-firmware.sh Fusion
+
+      - name: Copy final BIN
+        run: |
+          mkdir -p dist
+          cp upstream/build/Fusion/f4hwn.fusion.bin dist/KARINA_V3_IMPROVED_FUSION.bin
+          ls -lh dist/KARINA_V3_IMPROVED_FUSION.bin
+
+      - name: Upload BIN
+        uses: actions/upload-artifact@v4
+        with:
+          name: KARINA-V3-IMPROVED
+          path: dist/KARINA_V3_IMPROVED_FUSION.bin
